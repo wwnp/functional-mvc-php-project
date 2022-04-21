@@ -1,3 +1,7 @@
+<?php
+include_once 'functions.php';
+var_dump(test(5));
+?>
 <form class='appForm' method="POST">
   Name: <br><input type="text" name="name">
   Phone:<br><input type="text" name="phone">
@@ -9,7 +13,6 @@ let form = document.querySelector('.appForm')
 form.addEventListener('submit', function(e) {
   e.preventDefault()
   let formData = new FormData(form)
-  console.log(formData)
   fetch('api.php', {
       method: 'POST',
       body: formData
