@@ -7,7 +7,11 @@ $articles = getArts();
   <? foreach ($articles as $key => $value) : ?>
 
   <div class="article">
-    <h2><?= $value['id'] ?><?= $value['name'] ?></h2>
+    <h2><?= $value['name'] ?></h2>
+    <a href="article.php?id=<?= $value['id'] ?>">Read more</a>
+  </div>
+  <div class="article">
+    <h2><?= $value['name'] ?></h2>
     <a href="article.php?id=<?= $value['id'] ?>">Read more</a>
   </div>
 
