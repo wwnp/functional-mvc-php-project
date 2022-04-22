@@ -1,41 +1,67 @@
 <?php
-declare (strict_types = 1);
 
-function test(int $num): array
+// your functions may be here
+
+/* start --- black box */
+function getArticles(): array
 {
-    return [$num, 2];
+    return json_decode(file_get_contents('db/articles.json'), true);
 }
 
-function getArts(string $str): array
+function addArticle(string $title, string $content): bool
 {
-    return [
-        1 => [
-            'id' => 1,
-            'name' => 'wqeqwe',
-        ],
-        2 => [
-            'id' => 2,
-            'name' => 'wqeqwe',
-        ],
-        3 => [
-            'id' => 3,
-            'name' => 'wqeqwe',
-        ],
-        4 => [
-            'id' => 4,
-            'name' => 'wqeqwe',
-        ],
-        5 => [
-            'id' => 5,
-            'name' => 'wqeqwe',
-        ],
-        6 => [
-            'id' => 6,
-            'name' => 'wqeqwe',
-        ],
-        7 => [
-            'id' => 7,
-            'name' => 'wqeqwe',
-        ],
+    $articles = getArticles();
+
+    $lastId = end($articles)['id'];
+
+    echo '<script>';
+    echo 'console.log(' . json_encode($lastId) . ')';
+    echo '</script>';
+
+    $id = $lastId + 1;
+
+    $articles[$id] = [
+        'id' => $id,
+        'title' => $title,
+        'content' => $content,
     ];
+
+    saveArticles($articles);
+    return true;
 }
+
+function removeArticle(int $id): bool
+{
+    $articles = getArticles();
+
+    if (isset($articles[$id])) {
+        unset($articles[$id]);
+        saveArticles($articles);
+        return true;
+    }
+
+    return false;
+}
+
+function saveArticles(array $articles): bool
+{
+    file_put_contents('db/articles.json', json_encode($articles));
+    return true;
+}
+
+function editArticle(int $id, string $title, string $content): bool {
+  $articles = getArticles();
+  if(isset($articles[$id])){
+    $articles[$id] = [
+      'id' => $id,
+      'title' => $title,
+      'content' => $content,
+    ];
+    saveArticles($articles);
+    return true;
+  }
+  return false;
+  
+}
+
+/* end --- black box */
