@@ -1,30 +1,14 @@
 <?php
 include_once 'functions.php';
-var_dump(test(5));
+$articles = getArticles();
+
 ?>
-<form class='appForm' method="POST">
-  Name: <br><input type="text" name="name">
-  Phone:<br><input type="text" name="phone">
-  <button type="submit">Send</button>
-  <p class='err'></p>
-</form>
-<script>
-let form = document.querySelector('.appForm')
-form.addEventListener('submit', function(e) {
-  e.preventDefault()
-  let formData = new FormData(form)
-  fetch('api.php', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(json => {
-      console.log(json)
-      if (json.res) {
-        form.innerHTML = 'DONE'
-      } else {
-        document.querySelector('.err').innerHTML = json.error
-      }
-    })
-})
-</script>
+<a href="add.php">Add article</a>
+<div class='articles'>
+  <?foreach ($articles as $key => $value): ?>
+    <div class='article'>
+      <h4><?=$value['title']?></h4>
+      <a href="article.php?id=<?=$value['id']?>">Read More</a>
+    </div>
+  <?endforeach;?>
+</div>
