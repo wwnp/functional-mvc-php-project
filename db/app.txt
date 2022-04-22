@@ -1,1 +1,4 @@
-[{"dt":"2022-23-04 00:20:06","name":"asdasd","phone":"asdasd"},{"dt":"2022-23-04 00:21:03","name":"Sergey","phone":"123123123"},{"dt":"2022-23-04 00:24:59","name":"Sex","phone":"asdsadsa"}]
+2022-23-04 00:57:02;Sex;asdsadsad
+2022-23-04 00:57:05;Sex;asdsadsad
+2022-23-04 00:57:06;Sex;asdsadsad
+2022-23-04 01:21:07;Sergey;+1235891

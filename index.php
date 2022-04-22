@@ -24,6 +24,10 @@ else{
 	$phone = '';
 }
 
+
+echo '<pre>';
+print_r(explode(' ','123 456 123'));
+echo '</pre>';
 ?>
 <div class="form">
 	<? if($isSend): ?>
