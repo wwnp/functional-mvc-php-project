@@ -1,6 +1,16 @@
-<?php 
+<?php
+
 function getApps(): array {
-  $lines = file('db/app.txt');
+  $f = fopen('db/apps.txt', 'r');
+  $str = fread($f, filesize('db/apps.txt'));
+  $lines = explode("\n",$str);
+  echo '<pre>';
+  print_r($lines);
+  echo '</pre>';
+  array_pop($lines); // unset($lines[count($lines) - 1]);
+  echo '<pre>';
+  print_r($lines);
+  echo '</pre>';
   $apps = [];
   foreach($lines as $line){
     $apps[] = appStrToArr($line);
@@ -8,19 +18,17 @@ function getApps(): array {
   return $apps;
 }
 
+function appStrToArr(string $str) : array{
+	// $str = rtrim($str);
+	$parts = explode(';', $str);
+	return ['dt' => $parts[0], 'name' => $parts[1], 'phone' => $parts[2]];
+}
+
 function addApp(string $name, string $phone): bool {
   $dt = date('Y-d-m H:i:s');
   $app = "$dt;$name;$phone\n";
-  file_put_contents('db/app.txt',$app, FILE_APPEND);
+  $f = fopen('db/apps.txt', 'a+');
+  fwrite($f,$app);
+  fclose($f);
   return true;
-}
-
-function appStrToArr(string $line): array{
-  $str = rtrim($line);
-  $part = explode(';',$str);
-  return [
-    'dt' => $part[0],
-    'name' => $part[1],
-    'phone' => $part[2],
-  ];
 }

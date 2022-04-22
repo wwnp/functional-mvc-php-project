@@ -1,6 +1,7 @@
 <?php
 
 include_once('model/apps.php');
+
 $isSend = false;
 $err = '';
 
@@ -15,8 +16,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$err = 'Имя не короче 2 символов!';
 	}
 	else{
-    addApp($name,$phone);
-    $isSend = true;
+		addApp($name, $phone);
+		$isSend = true;
 	}
 }
 else{
@@ -24,10 +25,6 @@ else{
 	$phone = '';
 }
 
-
-echo '<pre>';
-print_r(explode(' ','123 456 123'));
-echo '</pre>';
 ?>
 <div class="form">
 	<? if($isSend): ?>
