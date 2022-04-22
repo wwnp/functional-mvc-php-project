@@ -12,6 +12,7 @@ $hasPost = $post ?? null;
     <h1><?=$post['title']?></h1>
     <div><?=$post['content']?></div>
     <hr>
+    <a href="edit.php?id=<?=$id?>">Edit</a>
     <a href="delete.php?id=<?=$id?>">Remove</a>
   <?else: ?>
     <div class="e404">

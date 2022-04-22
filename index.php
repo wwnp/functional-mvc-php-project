@@ -1,7 +1,6 @@
 <?php
 include_once 'functions.php';
 $articles = getArticles();
-
 ?>
 <a href="add.php">Add article</a>
 <div class='articles'>

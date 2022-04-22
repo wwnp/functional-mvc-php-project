@@ -1,15 +1,11 @@
-<?php
+<?php 
 include_once 'functions.php';
-
-$articles = getArticles();
-echo '<pre>';
-print_r($articles);
-echo '</pre>';
 
 $err = '';
 $isSend = false;
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  $id = (int) $_GET["id"] ?? '';
   $title = trim($_POST["title"]);
   $content = trim($_POST["content"]);
   if( $title === '' ||  $content === '') {
@@ -17,13 +13,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   }elseif(mb_strlen($title) < 2){
     $err = 'title should be above 2';
   }else {
-    addArticle($title,$content);
+    editArticle($id,$title,$content);
     $isSend = true;
     header('Location: '.$_SERVER["PHP_SELF"], true, 303);
   }
 }
-?>
 
+?>
+<h1>Edit</h1>
 <? if($isSend):?>
   <h1>DONE</h1>
 <? else: ?>

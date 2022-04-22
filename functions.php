@@ -48,4 +48,20 @@ function saveArticles(array $articles): bool
     file_put_contents('db/articles.json', json_encode($articles));
     return true;
 }
+
+function editArticle(int $id, string $title, string $content): bool {
+  $articles = getArticles();
+  if(isset($articles[$id])){
+    $articles[$id] = [
+      'id' => $id,
+      'title' => $title,
+      'content' => $content,
+    ];
+    saveArticles($articles);
+    return true;
+  }
+  return false;
+  
+}
+
 /* end --- black box */
