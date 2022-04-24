@@ -1,14 +1,14 @@
 <?php
-$f = fopen('db.txt', 'r');
-$total = 0;
-$cnt = 0;
-while (!feof($f)) {
-  $str = rtrim(fgets($f));
-  if($str !== ''){
-    $total += (string) $str;
-    $cnt++;
-  }
-}
-echo memory_get_usage() . '<br>';
-echo $total / $cnt;
-fclose($f);
+$files = scandir('images');
+$images = array_filter($files,function($f){
+  return is_file("images/$f") && preg_match('/.*\.jpg$/', $f);
+});
+echo '<pre>';
+print_r(array_values($images));
+echo '</pre>';
+?>
+<div>
+  <? foreach($images as $image) : ?>
+    <img src="images/<?= $image ?>" alt="qwe" width="300px">
+  <? endforeach; ?>
+</div>
