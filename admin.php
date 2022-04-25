@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-
+include_once 'model/gallery.php';
 $isSend = false;
 $err = '';
 
@@ -12,16 +12,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	else if($file['size'] === 0){
 		$err = 'Файл слишком большой!';
 	}
-	else if(!preg_match('/.*\.jpg$/',$file['name'])){
+	else if(!checkName($file['name'])){
 		$err = 'Неправильно расширение. Должно быть jpg!';
 	}
 	else{
     copy($file['tmp_name'],'images/' . mt_rand(1000,10000) . '.jpg');
 		$isSend = true;
 	}
-}else {
-  $name = '';
-  $phone = '';
 }
 ?>
 <div class="form">
