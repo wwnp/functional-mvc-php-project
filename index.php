@@ -1,15 +1,13 @@
 <?php
-include_once 'model/gallery.php';
-$files = scandir('images');
-$images = array_filter($files,function($f){
-  return is_file("images/$f") && checkName($f);
-});
-echo '<pre>';
-print_r(array_values($images));
-echo '</pre>';
+include_once 'functions.php';
+$articles = getArticles();
 ?>
-<div>
-  <? foreach($images as $image) : ?>
-    <img src="images/<?= $image ?>" alt="qwe" width="300px">
-  <? endforeach; ?>
+<a href="add.php">Add article</a>
+<div class='articles'>
+  <?foreach ($articles as $key => $value): ?>
+    <div class='article'>
+      <h4><?=$value['title']?></h4>
+      <a href="article.php?id=<?=$value['id']?>">Read More</a>
+    </div>
+  <?endforeach;?>
 </div>
