@@ -1,38 +1,34 @@
-<?php
+<?php 
 include_once 'functions.php';
-
-$articles = getArticles();
-echo '<pre>';
-print_r($articles);
-echo '</pre>';
-
-$err = '';
-$isSend = false;
-
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-  $title = trim($_POST["title"]);
-  $content = trim($_POST["content"]);
-  if( $title === '' ||  $content === '') {
-    $err = 'fill inputs';
-  }elseif(mb_strlen($title) < 2){
-    $err = 'title should be above 2';
-  }else {
-    addArticle($title,$content);
-    $isSend = true;
-    header('Location: '.$_SERVER["PHP_SELF"], true, 303);
+  $err ='';
+  $isSend = false;
+  if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $name = $_POST['title'];
+    $content = $_POST['content'];
+    if($name === '' || $content === ''){
+      $err = 'No empty';
+    }
+    elseif(mb_strlen($name) < 2){
+      $err = 'Name More than 2';
+    }
+    else {
+      $isSend = true;
+      addArticle($name,$content);
+    }
+    
   }
-}
 ?>
-
-<? if($isSend):?>
-  <h1>DONE</h1>
-<? else: ?>
-<form method="POST">
-  title:<br><input type="text" name="title">
-  content:<br><input type="text" name="content">
+<? if(!$isSend): ?>
+<form method="post">
+  <input type="text" name='title'>
+  <input type="text" name='content'>
   <button type="submit">Send</button>
-  <p><?=$err?></p>
-</form>;
+  <? if($err): ?>
+    <p><?= $err ?></p>
+  <? endif; ?>
+</form>
+<? else: ?>
+  <h1>DONE</h1>
 <? endif; ?>
 <hr>
-<a href="index.php">Move to main page</a>
+<a href="index.php">Main Page</a>
