@@ -22,16 +22,20 @@
       'time' => $parts['time'] ?? null,
       'ip' => $parts['ip'] ?? null,
       'uri' => $parts['uri'] ?? null,
-      'referer' => $parts['referer' ?? null],
     ];
   }
 
   function addLogVisit(): bool {
     $date = date('Y-m-d');
-    $time = date('h:i-s');
+    $time = date('h:i:s');
     $log = [
-      
-    ]
-    echo $time;
+      'date' => $date,
+      'time' => $time,
+      'ip' => $_SERVER['SERVER_ADDR'],
+      'uri' => $_SERVER['REQUEST_URI'],
+    ];
+    $log = json_encode($log) . "\n";
+    file_put_contents("db/visits/{$date}.txt", $log, FILE_APPEND );
+    return true;
   }
 ?>

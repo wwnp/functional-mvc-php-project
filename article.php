@@ -1,9 +1,11 @@
 <?php 
-    include_once 'functions.php';
-    $articles = getArticles();
-    $id = (int) $_GET["id"] ?? '';
-    echo $id;
-    $post = $articles[$id];
+  include_once 'functions.php';
+  include_once 'model/logging.php';
+  addLogVisit();
+  $articles = getArticles();
+  $id = (int) $_GET["id"] ?? '';
+  echo $id;
+  $post = $articles[$id];
 ?>
 <div>
   <? if($post): ?>

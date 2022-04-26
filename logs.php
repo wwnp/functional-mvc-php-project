@@ -1,5 +1,6 @@
 <?php 
   include_once 'model/logging.php';
+  addLogVisit();
   $allFiles = scandir('db/visits'); // Or any other directory
   $files = array_diff($allFiles, [ 0 => '.', 1 =>  '..']);
   $outArray = fromTxtToArray($files);
@@ -10,7 +11,6 @@
     <td>Time</td>
     <td>IP</td>
     <td>URI</td>
-    <td>REFERER</td>
   </tr>
   <? foreach($outArray as $key => $value ): ?>
     <tr>
@@ -39,13 +39,6 @@
         <?= 
         isset($value['uri']) 
           ? $value['uri']
-          : "X"
-        ?>
-      </td>
-      <td>
-        <?= 
-        $value['referer'] !== '' && isset($value['referer']) 
-          ? $value['referer']
           : "X"
         ?>
       </td>

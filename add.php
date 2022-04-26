@@ -1,5 +1,7 @@
 <?php 
-include_once 'functions.php';
+  include_once 'functions.php';
+  include_once 'model/logging.php';
+  addLogVisit();
   $err ='';
   $isSend = false;
   if($_SERVER['REQUEST_METHOD'] === 'POST'){

@@ -1,5 +1,9 @@
 <?php 
   include_once 'functions.php';
+  include_once 'model/logging.php';
+  
+  addLogVisit();
+
   $id = (int) $_GET["id"] ?? '';
   $out = '';
   $articles = getArticles();
