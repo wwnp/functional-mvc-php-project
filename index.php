@@ -1,6 +1,8 @@
 <?php 
   include_once 'functions.php';
+  include_once 'model/logging.php';
   $articles = getArticles();
+  addLogVisit()
 ?>
 <div>
   <? foreach($articles as $article) : ?>
