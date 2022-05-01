@@ -1,36 +1,11 @@
 <?php 
-  include_once 'functions.php';
-  include_once 'model/logging.php';
-  addLogVisit();
-  $err ='';
-  $isSend = false;
-  if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $name = $_POST['title'];
-    $content = $_POST['content'];
-    if($name === '' || $content === ''){
-      $err = 'No empty';
-    }
-    elseif(mb_strlen($name) < 2){
-      $err = 'Name More than 2';
-    }
-    else {
-      $isSend = true;
-      addArticle($name,$content);
-    }
-    
-  }
+  $name = 'Stark';
+  $db = new PDO('mysql:host=localhost;dbname=chat', "root", "");
+  $db->exec('SET NAMES UTF8');
+  $sql = "--sql
+    INSERT messages (name, text) 
+    VALUES (:user, :text);
+  ";
+  $db->exec($sql); 
 ?>
-<? if(!$isSend): ?>
-<form method="post">
-  <input type="text" name='title'>
-  <input type="text" name='content'>
-  <button type="submit">Send</button>
-  <? if($err): ?>
-    <p><?= $err ?></p>
-  <? endif; ?>
-</form>
-<? else: ?>
-  <h1>DONE</h1>
-<? endif; ?>
-<hr>
-<a href="index.php">Main Page</a>
+
