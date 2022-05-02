@@ -1,12 +1,12 @@
 <?php 
-  
+  error_reporting(E_ALL & ~E_NOTICE);
 
   $db = new PDO('mysql:host=localhost;dbname=chat', "root", "");
   $db->exec('SET NAMES UTF8');
 
   $sql = "
-    INSERT messages (name, text) 
-    VALUES (:name, :text); 
+    INSERT messages (namе, text) 
+    VALUES (:name, :text)
   ";
   $query = $db->prepare($sql);
 
@@ -14,17 +14,12 @@
     'name' => 'czxc',
     'text' => 'zxczxczxczx',
   ];
-  // $query->execute($params);
-  foreach ($params as $key => $value) {
-    $query->bindParam(":$key",$params[$key]);
-  };
-  $query->execute();
-  // 1.bindParams
-  // $name = 'Admin'; // &_POST['name']
-  // $text = '123'; // &_POST['text']
+  $query->execute($params);
 
-  // $query = $db->prepare($sql); 
-  // $query->bindParam(':name', $name);
-  // $query->bindParam(':text',$text);
-  // $query->execute()
+  $errInfo = $query->errorInfo();
+  if($errInfo[0] !== PDO::ERR_NONE){
+    echo $errInfo[2];
+    exit();
+  }
+   
 ?>
