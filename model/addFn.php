@@ -1,9 +1,9 @@
 <?php 
-  function trimFields(array $assoc): array {
-    $newAssoc = [];
-    foreach ($assoc as $key => $value) {
-      $newAssoc[$key] = trim($value);
+  function fillFieldsFromPost() {
+    $out = [];
+    foreach ($_POST as $key => $value) {
+      $out[$key] = trim($value);
     }
-    return $newAssoc;
+    return $out;
   }
 ?>

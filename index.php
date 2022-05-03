@@ -1,40 +1,13 @@
 <?php 
-  error_reporting(E_ALL & ~E_NOTICE);
-  echo "INDEX.php";
-  $db = new PDO('mysql:host=localhost;dbname=chat', "root", "", [
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-  ]);
-  $db->exec('SET NAMES UTF8');
+  include_once('model/db.php');
+  $db = dbInstance();
 
   $sql = "
     SELECT * FROM messages ORDER BY dt_add DESC;
   ";
-
-  $query = $db->prepare($sql);
-  $query->execute();
-  $errInfo = $query->errorInfo();
-
-  if($errInfo[0] !== PDO::ERR_NONE){
-    echo $errInfo[2];
-    exit();
-  }
+  $query = dbQuery($sql);
 
   $messages = $query->fetchAll();
-  echo '<pre>';
-  print_r($messages);
-  echo '</pre>';
-  echo '<hr>';
-
-
-  // function myFetchAll($query) {
-  //   $out = [];
-  //   $arr = $query->fetch();
-  //   for ($i = 0; $arr !== false; $i++) {
-  //     $arr = $query->fetch();
-  //     $out[$i] = $arr;
-  //   }
-  //   return $out;
-  // }
 ?>
 <div>
   <? foreach($messages as $key => $value ): ?>

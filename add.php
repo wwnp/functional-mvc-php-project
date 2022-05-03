@@ -1,12 +1,13 @@
 <?php 
-  require_once("model/addFn.php");
-  $db = new PDO('mysql:host=localhost;dbname=chat', "root", "");
-  $db->exec('SET NAMES UTF8');
+  include_once("model/addFn.php");
+  include_once('model/db.php');
+  $db = dbInstance();
 
-  $fields = ['name' => '   abc   ', 'text' => ' 123 '];
+  $fields = ['name' => '', 'text' => ''];
   $err = '';
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $fields = fillFieldsFromPost();
     $dt = date('Y-d-m H:i:s');
     if ($fields['name'] === '' ||  $fields['text'] === '') {
         $err = 'fill';
@@ -17,15 +18,8 @@
         INSERT messages (name, text) 
         VALUES (:name, :text)
       ";
-      $query = $db->prepare($sql);
-    
-      $query->execute(trimFields($fields));
-    
-      $errInfo = $query->errorInfo();
-      if($errInfo[0] !== PDO::ERR_NONE){
-        echo $errInfo[2];
-        exit();
-      }
+      
+      $query = dbQuery($sql, $fields);
       
       header('Location: index.php');
       exit();
