@@ -2,7 +2,7 @@
   function dbInstance(): PDO {
     static $db;
     if($db === null){
-      $db = new PDO('mysql:host=localhost;dbname=chat', "root", "", [
+      $db = new PDO('mysql:host=localhost;dbname=articles', "root", "", [
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
       ]);
       $db->exec('SET NAMES UTF8');
