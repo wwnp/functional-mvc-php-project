@@ -47,4 +47,4 @@
   <button type="submit">Send</button>
   <p><?=$err?></p>
 </form>;
-
+<a href="delete.php?id=<?= $id ?>">DELETE</a>
