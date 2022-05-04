@@ -2,12 +2,7 @@
   include_once('model/db.php');
   include_once('model/articles.php');
   $articles = fetchArticles();
-
   $cats = fetchCats();
-  echo '<pre>';
-  print_r($articles);
-  echo '</pre>';
-  echo '<hr>';
 ?>
 <div>
   <a href="add.php">Add article</a>

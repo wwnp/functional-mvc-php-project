@@ -49,5 +49,15 @@
     $query = dbQuery($sql);
     $article = $query->fetchAll();
     return $article;
-    }
+  }
+
+  function deleteArticle($id) {
+    $sql = "
+      DELETE FROM `articles`
+      WHERE id_article={$id};
+    ";
+    $query = dbQuery($sql);
+    return true;
+  }
+
 ?>
