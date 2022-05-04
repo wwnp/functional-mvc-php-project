@@ -1,7 +1,7 @@
 <?php 
   include_once("model/addFn.php");
   include_once('model/db.php');
-  $db = dbInstance();
+  include_once('model/messages.php');
 
   $fields = ['name' => '', 'text' => ''];
   $err = '';
@@ -10,24 +10,16 @@
     $fields = fillFieldsFromPost();
     $dt = date('Y-d-m H:i:s');
     if ($fields['name'] === '' ||  $fields['text'] === '') {
-        $err = 'fill';
-    } else {
-      $isSend = true;
-
-      $sql = "
-        INSERT messages (name, text) 
-        VALUES (:name, :text)
-      ";
-      
-      $query = dbQuery($sql, $fields);
-      
-      header('Location: index.php');
+      $err = 'fill';
       exit();
-
+    } 
+      $isSend = true;
+      insertMsg($fields);
+      header("Location: index.php");
+      exit();
       // for article
       // $lastInsId = $db->lastInsertId();
       // header("Location: add.php?id{$lastInsId}"); 
-    }
   } 
 
 ?>
