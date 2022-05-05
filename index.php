@@ -4,10 +4,6 @@
   $articles = fetchArticles();
 
   $cats = fetchCats();
-  echo '<pre>';
-  print_r($articles);
-  echo '</pre>';
-  echo '<hr>';
 ?>
 <div>
   <a href="add.php">Add article</a>
