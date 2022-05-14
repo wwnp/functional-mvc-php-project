@@ -1,4 +1,4 @@
 <div>
-  <h1><?= $article[0]['title'] ?></h1>
-  <p><?= $article[0]['content']?></p>
+  <h1><?= $title ?></h1>
+  <p><?= $content?></p>
 </div>

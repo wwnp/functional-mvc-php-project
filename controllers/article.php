@@ -3,9 +3,15 @@
   $id = $_GET['id'] ?? '';
   $article = fetchArticle($id);
   if($article){
-    include('views/v_article.php');
+    $article = $article[0];
+    
+    $pageTitle = $article['title'];
+    $pageContent = template('v_article', [
+      'title' => $article['title'],
+      'content' => $article['content']
+    ]);
   }else {
+    $pageContent = template('errors/v_404');
     header('HTTP/1.1 404 Not Found');
-    include('views/errors/v_404.php');
   }
 ?>

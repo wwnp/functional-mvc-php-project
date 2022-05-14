@@ -6,6 +6,9 @@
       <option value="<?= $value['id_cat'] ?>"><?= $value['title'] ?></option>
     <? endforeach; ?>
   </select>
+  <br>
+  imageUrl :  <br>
+  <input type="url" name="imageUrl" id="imageUrl">
   <button type="submit">Send</button>
   <div class="error-list">
     <? foreach($validateErrors as $error ): ?>
