@@ -7,5 +7,5 @@
   $cats = fetchCats();
   $isTable = ($_GET['view'] ?? '') === 'table';
   $template = $isTable ? 'v_index_table' : 'v_index';
-  include("views/$template.php")
+  include("views/$template.php");
 ?>

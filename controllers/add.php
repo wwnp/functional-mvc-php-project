@@ -27,5 +27,5 @@
     $fields = ['title' => '', 'content' => '', 'id_cat' => '', 'imageUrl' => ''];
     $validateErrors = [];
   }
-  include("views/v_add.php")
+  include("views/v_add.php");
 ?>
