@@ -1,24 +1,11 @@
 <?php 
-  include_once('model/db.php');
-  include_once('model/articles.php');
-  $articles = fetchArticles();
+  $cname = $_GET["c"] ?? 'index';
+  $path = "controllers/$cname.php";
 
-  $cats = fetchCats();
+  if (file_exists($path) && preg_match("/^[a-z0-9-]/",$cname )) {
+    include_once($path);
+  }else {
+    header('HTTP/1.1 404 Not Found');
+    include('views/errors/v_404.php');
+  }
 ?>
-<div>
-  <a href="add.php">Add article</a>
-  <hr>
-  <hr>
-</div>
-<div style="display:flex;">
-  <? foreach($articles as $key => $value ): ?>
-    <div style="border-right: 1px solid #ccc;padding: .5rem;">
-      <p><?= $value['title'] ?></p>
-      <p><?= $value['content'] ?></p>
-      <p><?= $value['dt_add'] ?></p>
-      <p><?= $value['catTitle'] ?></p>
-      <a href="edit.php?id=<?= $value['id_article'] ?>">Edit2</a> 
-      <hr>
-    </div>
-  <? endforeach; ?>
-</div>
