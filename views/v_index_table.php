@@ -10,7 +10,7 @@
       <td><?= $value['content'] ?></td>
       <td><?= $value['dt_add'] ?></td>
       <td><?= $value['catTitle'] ?></td>
-      <td><a href="edit.php?id=<?= $value['id_article'] ?>">Edit2</a> </td>
+      <td><a href="index.php?c=edit&id=<?= $value['id_article'] ?>">Edit2</a> </td>
     </tr>
   <? endforeach; ?>
 </tab>

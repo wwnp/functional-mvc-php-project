@@ -1,5 +1,5 @@
 <?php 
-  include_once('db.php');
+  include_once('core/db.php');
 
   function fetchArticles() {
     $sql = "
@@ -9,15 +9,6 @@
     $query = dbQuery($sql);
     $articles = $query->fetchAll();
     return $articles;
-  }
-
-  function fetchCats() {
-    $sql = "
-      SELECT * from cats;
-    ";
-    $query = dbQuery($sql);
-    $cats = $query->fetchAll();
-    return $cats;
   }
 
   function addArticle($params) {
@@ -52,12 +43,39 @@
   }
 
   function deleteArticle($id) {
+    echo "123";
     $sql = "
       DELETE FROM `articles`
       WHERE id_article={$id};
     ";
     $query = dbQuery($sql);
+    
     return true;
   }
 
+  function validateFields(array &$fields): array {
+    $errors = [];
+
+    if ($fields['title'] === ''  ) { 
+      $errors[] = 'fill title';
+    }
+    if ($fields['content'] === ''  ) { 
+      $errors[] = 'fill content';
+    }
+    if (mb_strlen($fields['title'], 'UTF-8') < 2  )   { 
+      $errors[] = 'more 2';
+    }
+    if (mb_strlen($fields['content'], 'UTF-8') < 3  )   {   
+      $errors[] = 'more 3';
+    }
+    $fields['title'] = htmlspecialchars($fields['title']);
+    $fields['content'] = htmlspecialchars($fields['title']);
+    return $errors;
+  }
+  // or 
+  // function prepareFieldsRemoveHTML(array $fields): array {
+  //   $fields['title'] = htmlspecialchars($fields['title']);
+  //   $fields['content'] = htmlspecialchars($fields['content']);
+  //   return $fields;
+  // }
 ?>

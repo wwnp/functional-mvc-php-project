@@ -1,5 +1,5 @@
 <div>
-  <a href="add.php">Add article</a>
+  <a href="index.php?c=add">Add article</a>
   <a href="index.php?view=table">View as table</a>
   <hr>
 </div>
@@ -10,7 +10,8 @@
       <p><?= $value['content'] ?></p>
       <p><?= $value['dt_add'] ?></p>
       <p><?= $value['catTitle'] ?></p>
-      <a href="edit.php?id=<?= $value['id_article'] ?>">Edit2</a> 
+      <a href="index.php?c=edit&id=<?= $value['id_article']?>">Edit</a> 
+      <a href="index.php?c=article&id=<?= $value['id_article'] ?>">More</a> 
     </div>
   <? endforeach; ?>
 </div>
