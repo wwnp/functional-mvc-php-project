@@ -3,7 +3,7 @@
 
   function fetchArticles() {
     $sql = "
-      SELECT articles.id_article, articles.title, articles.content, articles.dt_add, cats.title as catTitle FROM `articles` 
+      SELECT articles.id_article, articles.title, articles.content, articles.dt_add, cats.title as catTitle, articles.imageUrl FROM `articles` 
       LEFT JOIN cats ON  (articles.id_cat = cats.id_cat);
     ";
     $query = dbQuery($sql);
@@ -12,9 +12,13 @@
   }
 
   function addArticle($params) {
+    echo '<pre>';
+    print_r($params);
+    echo '</pre>';
+    echo '<hr>';
     $sql = "
-      INSERT INTO `articles` (`title`, `content`, `id_cat`)
-      VALUES (:title, :content, :id_cat);
+      INSERT INTO `articles` (`title`, `content`, `id_cat`, `imageUrl`)
+      VALUES (:title, :content, :id_cat, :imageUrl);
     ";
     $query = dbQuery($sql,$params);
     return true;
