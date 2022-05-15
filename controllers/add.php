@@ -27,5 +27,12 @@
     $fields = ['title' => '', 'content' => '', 'id_cat' => '', 'imageUrl' => ''];
     $validateErrors = [];
   }
-  include("views/v_add.php");
+
+  $pageTitle = 'Add';
+  $pageContent = template('v_add', [
+    'fields' => $fields,
+    'validateErrors' => $validateErrors,
+    'cats' => $cats
+  ]);
+  // include("views/v_add.php");
 ?>

@@ -2,12 +2,14 @@
   include_once 'core/system.php';
   $cname = $_GET["c"] ?? 'index';
   $path = "controllers/$cname.php";
-  $pageTitle = 'Ошибка 404';
+  $pageTitle = '';
   $pageContent = '';
 
-  if (file_exists($path) && preg_match("/^[a-z0-9-]/",$cname )) {
+  if (file_exists($path) && preg_match("/^[a-z0-9-]/", $cname ) ) {
     include_once($path);
-  }else {  
+  }
+  else {  
+    $pageTitle = 'Ошибка 404';
     $pageContent = template('errors/v_404');
     header('HTTP/1.1 404 Not Found');
   }
