@@ -1,9 +1,9 @@
 <?php 
-  function template(string $path, array $vars = []):string {
-    $systemFullPath = "views/{$path}.php";
+  function template($path, $vars = []) {
+    $fullPath = "views/{$path}.php";
     extract($vars);
     ob_start();
-    include($systemFullPath);
+    include($fullPath);
     return ob_get_clean();
   }
 ?>

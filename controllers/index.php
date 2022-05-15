@@ -1,11 +1,13 @@
 <?php 
-  include_once('model/articles.php');
-  include_once('model/cats.php');
-
+  include_once('model/articlesFns.php');
   $articles = fetchArticles();
-
-  $cats = fetchCats();
-  $isTable = ($_GET['view'] ?? '') === 'table';
-  $template = $isTable ? 'v_index_table' : 'v_index';
-  include("views/$template.php");
+  if($articles){
+    $pageTitle = 'Статьи';
+    $pageContent = template('v_index', [
+      'articles' => $articles
+    ]);
+  }else{
+    $pageTitle = '404';
+    $pageContent = template('v_404');
+  }
 ?>
