@@ -11,6 +11,7 @@
       'content' => $article['content']
     ]);
   }else {
+    $pageTitle = '404';
     $pageContent = template('errors/v_404');
     header('HTTP/1.1 404 Not Found');
   }
