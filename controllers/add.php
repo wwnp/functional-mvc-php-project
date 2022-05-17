@@ -34,5 +34,4 @@
     'validateErrors' => $validateErrors,
     'cats' => $cats
   ]);
-  // include("views/v_add.php");
 ?>
